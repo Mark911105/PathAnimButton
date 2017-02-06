@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PopMenu">
+        <attr name="animIn" format="reference"/>
+        <attr name="animOut" format="reference"/>
+    </declare-styleable>
+</resources>
