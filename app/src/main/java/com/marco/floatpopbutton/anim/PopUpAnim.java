@@ -1,71 +1,63 @@
 package com.marco.floatpopbutton.anim;
 
 import android.view.View;
-import com.marco.floatpopbutton.widget.IPosition;
-
-import java.util.ArrayList;
+import com.marco.floatpopbutton.widget.PopAnimator;
 
 /**
  * User: KdMobiB
  * Date: 2017/2/6
  * Time: 18:48
  */
-public class PopUpAnim implements IPosition {
-    int measureHeight, normalHeight, padding, duration, alpha;
-    private ArrayList<View> views = new ArrayList<>();
+public class PopUpAnim extends PopAnimator {
+    private int padding = 8;
+    private int type;//左上右下
+    int distance;
 
-    public PopUpAnim(int measureHeight, int normalHeight, int padding, ArrayList<View> views) {
-        this(measureHeight, normalHeight, padding, 400, 1, views);
-    }
-
-    public PopUpAnim(int measureHeight, int normalHeight, int padding, int duration, int alpha, ArrayList<View> views) {
-        this.measureHeight = measureHeight;
-        this.normalHeight = normalHeight;
-        this.padding = padding;
-        this.duration = duration;
-        this.alpha = alpha;
-        this.views = views;
-    }
-
-    @Override
     public void doAnimOut() {
-        measureHeight = normalHeight;
+        if (views.isEmpty()) return;
         for (int i = 0; i < views.size(); i++) {
             View view = views.get(i);
-            measureHeight = measureHeight + view.getMeasuredHeight() + padding;
+            if (i == 0) {
+                distance = measureHeight / 2 - view.getMeasuredHeight() / 2;
+            }
+            distance = distance + view.getMeasuredHeight() + padding;
             view.animate()
                     .setDuration(duration)
-                    .translationYBy(0)
-                    .translationY(-measureHeight)
+                    .translationY(getDirection() ? 0 : getDistance())
+                    .translationX(getDirection() ? getDistance() : 0)
                     .rotation(360)
-                    .rotationBy(0)
                     .alphaBy(0)
                     .alpha(alpha);
         }
     }
 
-    @Override
-    public void doAnimIn() {
-        measureHeight = normalHeight;
-        for (int i = 0; i < views.size(); i++) {
-            View view = views.get(i);
-            measureHeight = measureHeight + view.getMeasuredHeight() + padding;
-            view.animate()
-                    .setDuration(duration)
-                    .translationYBy(-measureHeight)
-                    .translationY(0)
-                    .rotation(0)
-                    .rotationBy(360)
-                    .alphaBy(alpha)
-                    .alpha(0);
-        }
+    /**
+     * 计算距离
+     *
+     * @return
+     */
+    public int getDistance() {
+        return type > 1 ? distance : -distance;
     }
 
-    public void setDuration(int duration) {
-        this.duration = duration;
+    /**
+     * 获取方向
+     *
+     * @return
+     */
+    public boolean getDirection() {
+        //返回横向为true
+        return type % 2 == 0;
     }
 
-    public void setAlpha(int alpha) {
-        this.alpha = alpha;
+    public PopUpAnim setType(int type) {
+        type %= 4;
+        this.type = type;
+        return this;
     }
+
+    public void setPadding(int padding) {
+        this.padding = padding;
+    }
+
 }

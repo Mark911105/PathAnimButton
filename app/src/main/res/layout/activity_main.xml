@@ -1,26 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<com.marco.floatpopbutton.widget.PopMenu
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_centerInParent="true"
-    >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
     <Button
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@android:color/holo_blue_bright"/>
+        android:id="@+id/btnChange"
+        android:onClick="onBtnChange"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="换一个效果"
+        android:layout_alignParentBottom="true"
+        />
 
     <Button
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@android:color/holo_green_dark"/>
+        android:id="@+id/btnAdd"
+        android:onClick="onBtnAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="添加"
+        android:layout_alignParentBottom="true"
+        />
 
     <Button
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_gravity="center"
-        android:background="@android:color/holo_purple"/>
+        android:id="@+id/btnMul"
+        android:onClick="onBtnMul"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="减少"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        />
 
-</com.marco.floatpopbutton.widget.PopMenu>
+    <com.marco.floatpopbutton.widget.PopMenu
+        android:id="@+id/menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/btnChange"
+        >
+
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@mipmap/ic_launcher"
+            />
+
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@mipmap/ic_launcher"/>
+
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@mipmap/ic_launcher"/>
+
+        <Button
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:background="@android:color/holo_purple"
+            />
+    </com.marco.floatpopbutton.widget.PopMenu>
+
+</RelativeLayout>

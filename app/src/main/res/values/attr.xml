@@ -3,5 +3,8 @@
     <declare-styleable name="PopMenu">
         <attr name="animIn" format="reference"/>
         <attr name="animOut" format="reference"/>
+
+        <!--阴影-->
+        <attr name="shade" format="boolean"/>
     </declare-styleable>
 </resources>
